@@ -144,3 +144,93 @@ var videoPlaySectionData = [
     "isSaved": true
   }
 ]
+
+let playlistWrapper=document.getElementById("playlist-wrapper");
+let playerWrapper=document.getElementById("player-wrapper");
+
+playerWrapper.innerHTML=`
+<iframe id="video-player" src="https://player.vimeo.com/video/${videoPlaySectionData[0].vimeoId}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+                    <div>
+                        <div id="video-actions">
+                            <p><span id="views-count">${videoPlaySectionData[0].views / 1000}k</span> views</p>
+
+                            <div>
+                                <i class="far fa-heart"></i>
+                                <i class="far fa-comment-alt"></i>
+                                <i class="far fa-bookmark"></i>
+                            </div>
+                        </div>
+                        <h3 id="video-title">${videoPlaySectionData[0].title}</h3>
+                        <p id="video-description">${videoPlaySectionData[0].description}</p>
+                    </div>
+`
+
+
+
+for(let i=0;i<playlistData.length;i++){
+  // console.log(playlistData[i])
+
+  if(i==0){
+    playlistWrapper.innerHTML+=`
+    <div onClick="applyActive(${playlistData[i].id})" id="card${playlistData[i].id}" class="playlist-card active-card">
+    <img class="thumbnail" src=${playlistData[i].thumbnail} />
+    <h3 class="video-card-title">${playlistData[i].title}</h3>
+  </div>`
+  }else{
+    playlistWrapper.innerHTML+=`
+    <div onClick="applyActive(${playlistData[i].id})" id="card${playlistData[i].id}" class="playlist-card">
+    <img class="thumbnail" src=${playlistData[i].thumbnail} />
+    <h3 class="video-card-title">${playlistData[i].title}</h3>
+  </div>`
+  }
+
+ 
+}
+
+
+function applyActive(id){
+  // console.log("hi" , id)
+  $(".active-card").removeClass("active-card")
+  $("#card"+id).addClass("active-card")
+
+  playerWrapper.innerHTML=`
+<iframe id="video-player" src="https://player.vimeo.com/video/${videoPlaySectionData[id - 1].vimeoId}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+                    <div>
+                        <div id="video-actions">
+                            <p><span id="views-count">${videoPlaySectionData[id - 1].views / 1000}k</span> views</p>
+
+                            <div>
+                                <i class="far fa-heart"></i>
+                                <i class="far fa-comment-alt"></i>
+                                <i class="far fa-bookmark"></i>
+                            </div>
+                        </div>
+                        <h3 id="video-title">${videoPlaySectionData[id - 1].title}</h3>
+                        <p id="video-description">${videoPlaySectionData[id - 1].description}</p>
+                    </div>
+`
+}
+
+
+
+
+{
+/*<iframe id="video-player" src="https://player.vimeo.com/video/190062231" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+                    <div>
+                        <div id="video-actions">
+                            <p><span id="views-count">98.4k</span> views</p>
+
+                            <div>
+                                <i class="far fa-heart"></i>
+                                <i class="far fa-comment-alt"></i>
+                                <i class="far fa-bookmark"></i>
+                            </div>
+                        </div>
+                        <h3 id="video-title">Croissants | Flour and Stone</h3>
+                        <p id="video-description">There is no other way but to commit wholeheartedly to a relationship with a croissant. We have all found ourselves at the mercy of its allure. Here, in another epic film by the uber talented Nathan Rodger, our Erin divulges her personal romance with The Croissant.</p>
+                    </div>*/
+
+}
